@@ -97,6 +97,13 @@ $(function() {
       });
 
     /* TODO: Write a new test suite named "Initial Entries" */
+    describe('Initial Entries', function() {
+          beforeEach(function(done) {
+            setTimeout(function() {
+              console.log('waiting a bit');
+              done();
+            }, 1000);
+          });
 
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
@@ -104,11 +111,46 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test wil require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+         it('loadFeed has a single entry', function(done){
+            var ele = $("#feed");
+            var articles = $(".entry");
 
-    /* TODO: Write a new test suite named "New Feed Selection"
+            expect(articles.length).toBeGreaterThan(0);
+            done();
+        })
 
+    });
+
+    /* TODO: Write a new test suite named "New Feed Selection" */
+    describe('New Feed Selection', function() {
+        var firstText = '';
+
+          beforeEach(function(done) {
+              var articles = $(".entry");
+              firstText = articles[0].innerText;
+              console.log('a ' + firstText);
+              $('.feed-list').children(':last').children().click(); // load the last feed
+              setTimeout(function() {
+                console.log('waiting a bit, again');
+                done();
+              }, 1000);
+
+          });
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+         it('new feed loaded', function(done){
+              console.log('b ' + firstText);
+              var articles = $(".entry");
+              var newText = articles[0].innerText;
+
+              console.log('c ' + newText);
+
+              expect(newText).not.toEqual(firstText);
+
+              done();
+         })
+    });
+
 }());
