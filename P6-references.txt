@@ -1,3 +1,4 @@
 http://jasmine.github.io/
 https://github.com/udacity/ud549
 http://api.jquery.com/
+http://stackoverflow.com/questions/700752/chaining-selectors-in-jquery
