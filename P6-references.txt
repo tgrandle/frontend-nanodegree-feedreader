@@ -2,3 +2,4 @@ http://jasmine.github.io/
 https://github.com/udacity/ud549
 http://api.jquery.com/
 http://stackoverflow.com/questions/700752/chaining-selectors-in-jquery
+http://stackoverflow.com/questions/1450721/solution-for-jslint-errors
