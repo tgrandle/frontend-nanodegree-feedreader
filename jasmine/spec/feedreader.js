@@ -1,4 +1,4 @@
-/* global $, it, describe, expect, beforeEach, allFeeds */
+/* global $, it, describe, expect, beforeEach, allFeeds, loadFeed */
 
 /* feedreader.js
  *
@@ -94,11 +94,10 @@ $(function() {
 
   /* This suite checks the feed load functionality */
   describe('Initial Entries', function() {
+
     beforeEach(function(done) {
-      setTimeout(function() {
-        console.log('waiting a bit');
-        done();
-      }, 1000);
+      // load the second feed and pass done() to the callback
+      loadFeed(1, function() {done();});
     });
 
     /* This test checks when the loadFeed
@@ -124,11 +123,7 @@ $(function() {
       var articles = $('.entry');
       firstText = articles[0].innerText;
       console.log('a ' + firstText);
-      $('.feed-list').children(':last').children().click(); // load the last feed
-      setTimeout(function() {
-        console.log('waiting a bit, again');
-        done();
-      }, 1000);
+      loadFeed(3, function() {done();}); // load the last feed
     });
 
     /* Test to ensure when a new feed is loaded
@@ -148,4 +143,4 @@ $(function() {
     });
   });
 
-})();
+}());
