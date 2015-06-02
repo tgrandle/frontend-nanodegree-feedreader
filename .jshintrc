@@ -18,5 +18,5 @@
   "trailing": true,
   "smarttabs": true,
   "jquery": true,
-  "loopfunc": true //tjg
+  "immed": false //tjg
 }
