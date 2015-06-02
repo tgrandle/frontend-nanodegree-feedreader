@@ -106,41 +106,47 @@ $(function() {
     * Remember, loadFeed() is asynchronous so this test wil require
     * the use of Jasmine's beforeEach and asynchronous done() function.
     */
-    it('loadFeed has a single entry', function(done) {
+    it('loadFeed has a single entry', function() {
       var articles = $('.entry');
 
       expect(articles.length).toBeGreaterThan(0);
-      done();
     });
 
   });
 
   /* This test suite checks switching feed behavior */
   describe('New Feed Selection', function() {
-    var firstText = '';
-
-    beforeEach(function(done) {
-      var articles = $('.entry');
-      firstText = articles[0].innerText;
-      console.log('a ' + firstText);
-      loadFeed(3, function() {done();}); // load the last feed
-    });
 
     /* Test to ensure when a new feed is loaded
     * by the loadFeed function that the content actually changes.
     * Remember, loadFeed() is asynchronous.
     */
     it('new feed loaded', function(done) {
-      console.log('b ' + firstText);
-      var articles = $('.entry');
-      var newText = articles[0].innerText;
+      var firstText = '';
+      var cb1 = function() {
+        var articles = $('.entry');
+        firstText = articles[0].innerText;
+        console.log('a ' + firstText);
+      };
+      var cb2 = function() {
+        var articles = $('.entry');
+        var newText = articles[0].innerText;
+        console.log('b ' + newText);
 
-      console.log('c ' + newText);
+        expect(newText).not.toEqual(firstText);
+        done();
+      };
 
-      expect(newText).not.toEqual(firstText);
+      //load the first feed
+      loadFeed(0, cb1);
 
-      done();
+      //load the last feed
+      loadFeed(3, cb2);
+
+      // expect(true).toBe(true);
+      // done();
     });
+
   });
 
 }());
