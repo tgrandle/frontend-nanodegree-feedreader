@@ -127,12 +127,19 @@ $(function() {
         var articles = $('.entry');
         firstText = articles[0].innerText;
         console.log('a ' + firstText);
+
+        //load the last feed
+        loadFeed(3, cb2);
       };
       var cb2 = function() {
         var articles = $('.entry');
         var newText = articles[0].innerText;
         console.log('b ' + newText);
 
+        expect(newText.length).not.toBe(0);
+        expect(firstText.length).not.toBe(0);
+        expect(firstText).toBeDefined();
+        expect(newText).toBeDefined();
         expect(newText).not.toEqual(firstText);
         done();
       };
@@ -140,11 +147,6 @@ $(function() {
       //load the first feed
       loadFeed(0, cb1);
 
-      //load the last feed
-      loadFeed(3, cb2);
-
-      // expect(true).toBe(true);
-      // done();
     });
 
   });
