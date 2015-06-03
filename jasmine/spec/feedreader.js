@@ -123,14 +123,7 @@ $(function() {
     */
     it('new feed loaded', function(done) {
       var firstText = '';
-      var cb1 = function() {
-        var articles = $('.entry');
-        firstText = articles[0].innerText;
-        console.log('a ' + firstText);
 
-        //load the last feed
-        loadFeed(3, cb2);
-      };
       var cb2 = function() {
         var articles = $('.entry');
         var newText = articles[0].innerText;
@@ -142,6 +135,15 @@ $(function() {
         expect(newText).toBeDefined();
         expect(newText).not.toEqual(firstText);
         done();
+      };
+
+      var cb1 = function() {
+        var articles = $('.entry');
+        firstText = articles[0].innerText;
+        console.log('a ' + firstText);
+
+        //load the last feed
+        loadFeed(3, cb2);
       };
 
       //load the first feed
